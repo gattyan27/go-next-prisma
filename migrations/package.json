@@ -1,0 +1,16 @@
+{
+  "name": "freelance-go-migrate",
+  "version": "1.0.0",
+  "scripts": {
+    "migrate:dev": "prisma migrate dev --schema ../prisma/schema.prisma",
+    "migrate:deploy": "prisma migrate deploy --schema ../prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "@prisma/client": "^4.12.0",
+    "prisma": "^4.12.0"
+  },
+  "volta": {
+    "node": "20.12.2",
+    "npm": "10.7.0"
+  }
+}

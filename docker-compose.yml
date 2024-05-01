@@ -1,0 +1,27 @@
+version: "3.9" # 最新のバージョンに更新
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?schema=public"
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user # 以前は 'postgres' でしたが、serverのenvironmentで使われるユーザー名に合わせて 'user' に変更
+      POSTGRES_PASSWORD: password # 以前は 'postgres' でしたが、serverのenvironmentで使われるパスワードに合わせて 'password' に変更
+      POSTGRES_DB: mydb # 以前は 'postgres' でしたが、serverのenvironmentで使われるDB名に合わせて 'mydb' に変更
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
